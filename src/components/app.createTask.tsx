@@ -34,12 +34,13 @@ const AppCreateTask: FC =  () => {
         const task = {
             description:e.target.description.value,
             groupId:parseInt(e.target.groupId.value),
+            id: Math.floor(Math.random() * 100),
         }
-        dispatch($saveTask(task)).then(() => {
+        dispatch($saveTask(task)).then((data) => {
             navigate("/");
         }).catch((e) => {
             console.log(e);
-        })
+        });
     }
 
     return (

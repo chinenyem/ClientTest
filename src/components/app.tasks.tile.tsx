@@ -1,24 +1,51 @@
 import styled from "@emotion/styled";
-import { FC, useState } from "react";
+import { FC, useState, CSSProperties } from "react";
 import { TaskDetailsModel } from "../engine/proxies/task.proxy";
-import { mapProps } from "../engine/redux";
+import {mapDispatch, mapProps} from "../engine/redux";
 import CoreButton from "./controls/button";
+import {$deleteTask, $getTasks} from "../engine/slices/tasking.slice";
+import RotateLoader from "react-spinners/RotateLoader";
+
+const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+    top:"50%",
+    left:"50%",
+    zIndex: 1,
+    position: 'absolute',
+};
 
 type Props = {
   task: TaskDetailsModel;
 };
 
 const AppTasksTile: FC<Props> = (props) => {
-  const groupid = props.task.groupId;
-  const group = mapProps((state) => state.tasking.taskGroups.find((inst) => inst.id === groupid));
-  
+    const dispatch = mapDispatch();
+    const groupid = props.task.groupId;
+    const group = mapProps((state) => state.tasking.taskGroups.find((inst) => inst.id === groupid));
+    let [loading, setLoading] = useState(false);
+    let [color, setColor] = useState("#ffffff");
+
+    const completeTask = (id?:number) => {
+        setLoading(true);
+        dispatch($deleteTask(id)).then((data) => {
+            dispatch($getTasks()).then((data) => {
+                setLoading(false);
+            })
+        }).catch((e) => {
+            console.log(e);
+        });
+    }
+
   if (props.task) {
     return (
       <Styled>
+          {loading ? <RotateLoader color={color} loading={loading} cssOverride={override} size={150} /> : ""}
         <div className="description">{props.task.description}</div>
         <div className="group">{group && group.name}</div>
         <div className="complete">
-          <CoreButton text="Mark Complete" click={() => {}} />
+          <CoreButton text="Mark Complete" click={() => completeTask(props.task.id)} />
         </div>
       </Styled>
     );

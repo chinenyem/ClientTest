@@ -1,16 +1,6 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "description": "Labore et dolore magna aliqua",
-      "groupId": 1
-    },
-    {
-      "id": 2,
-      "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
-      "groupId": 2
-    },
-    {
       "id": 3,
       "description": "Ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum",
       "groupId": 3

@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getTaskGroups, getTasks, saveTask, TaskDetailsModel, TaskGroupModel } from "../proxies/task.proxy";
+import { getTaskGroups, getTasks, saveTask, deleteTask, TaskDetailsModel, TaskGroupModel } from "../proxies/task.proxy";
 
 export const $getTasks = createAsyncThunk("thunk-get-tasks", getTasks);
 export const $getTaskGroups = createAsyncThunk("thunk-get-task-groups", getTaskGroups);
 export const $saveTask = createAsyncThunk("thunk-add-task", saveTask);
+export const $deleteTask = createAsyncThunk("thunk-delete-task", deleteTask);
+
 
 
 export const taskingSlice = createSlice({
@@ -21,7 +23,10 @@ export const taskingSlice = createSlice({
       state.taskGroups = action.payload;
     });
     builder.addCase($saveTask.fulfilled, (state, action) => {
-      return [...state.activeTasks, ...action.payload]
+      state.activeTasks.push(action.payload);
+    });
+    builder.addCase($deleteTask.fulfilled, (state, action) => {
+      state.activeTasks = state.activeTasks.filter((task) => task.id !== action.payload && task.createdAt !== "");
     });
   },
 });
