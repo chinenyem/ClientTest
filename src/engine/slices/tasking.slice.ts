@@ -21,7 +21,7 @@ export const taskingSlice = createSlice({
       state.taskGroups = action.payload;
     });
     builder.addCase($saveTask.fulfilled, (state, action) => {
-      state.activeTasks.push(...action.payload);
+      return [...state.activeTasks, ...action.payload]
     });
   },
 });
