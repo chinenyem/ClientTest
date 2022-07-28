@@ -35,7 +35,11 @@ const AppCreateTask: FC =  () => {
             description:e.target.description.value,
             groupId:parseInt(e.target.groupId.value),
         }
-        dispatch($saveTask(task))
+        dispatch($saveTask(task)).then(() => {
+            navigate("/");
+        }).catch((e) => {
+            console.log(e);
+        })
     }
 
     return (
