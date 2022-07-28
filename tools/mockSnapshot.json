@@ -1,31 +1,6 @@
 {
   "tasks": [
     {
-      "id": 3,
-      "description": "Ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum",
-      "groupId": 3
-    },
-    {
-      "id": 4,
-      "description": "Dolore eu fugiat nulla pariatur",
-      "groupId": 1
-    },
-    {
-      "id": 5,
-      "description": "Excepteur sint occaecat cupidatat non proident",
-      "groupId": 2
-    },
-    {
-      "id": 6,
-      "description": "Sunt in culpa qui officia deserunt",
-      "groupId": 2
-    },
-    {
-      "id": 7,
-      "description": "Duis aute irure dolor in reprehenderit in voluptate",
-      "groupId": 1
-    },
-    {
       "id": 8,
       "description": "Aliquip ex ea commodo consequat",
       "groupId": 3

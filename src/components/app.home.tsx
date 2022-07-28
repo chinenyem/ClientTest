@@ -1,17 +1,21 @@
 import styled from "@emotion/styled";
-import { FC } from "react";
+import {CSSProperties, FC, useState} from "react";
 import {  mapProps } from "../engine/redux";
 import AppNav from "./app.navbar";
 import AppTasks from "./app.tasks";
+import AppLoader from "./app.loader";
+
 
 const AppHome: FC = () => {
   const ready = mapProps((state) => state.user.isAuthenticated);
-  return (
+    let [loading, setLoading] = useState(true);
+
+    return (
     <Styled>
       <div className="navbar">
         <AppNav />
       </div>
-      <div className="tasks">{ready ? <AppTasks /> : ""}</div>
+      <div className="tasks">{ready ? <AppTasks /> : <AppLoader loading={loading}  size={150} />}</div>
     </Styled>
   );
 };

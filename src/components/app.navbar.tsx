@@ -7,7 +7,6 @@ import {$authenticateUser} from "../engine/slices/user.slice";
 
 const AppNav: FC = () => {
     const dispatch = mapDispatch();
-    // This function will called only once
     useEffect(() => {
         dispatch($authenticateUser())
     }, [dispatch])

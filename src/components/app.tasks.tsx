@@ -6,12 +6,16 @@ import AppTasksTile from "./app.tasks.tile";
 import AppTasksGroup from "./app.tasks.group";
 import CoreButton from "./controls/button";
 import { useNavigate }  from "react-router-dom";
+import AppLoader from "./app.loader";
+
 
 const AppTasks: FC = () => {
   const navigate = useNavigate();
   const tasks = mapProps((state) => state.tasking.activeTasks);
   const groups = mapProps((state) => state.tasking.taskGroups);
   const [groupType , setGroupType ] = useState(0);
+  let [loading, setLoading] = useState(true);
+
   const createTask = () => {
     navigate("/task");
   };
@@ -42,12 +46,16 @@ const AppTasks: FC = () => {
         <div className="createTask">
           <CoreButton text="Create New Task" click={() => createTask()} />
         </div>
-        <div className="groups">{taskgroups}</div>
-        <div className="tasks">{tasktiles}</div>
+        {taskgroups && tasktiles ?
+            <div>
+              <div className="groups">{taskgroups}</div>
+              <div className="tasks">{tasktiles}</div>
+            </div>
+            : <AppLoader loading={loading}  size={150} />}
       </Styled>
     );
   }
-  return <h3>No Tasks</h3>;
+  return <h3><AppLoader loading={loading}  size={150} /></h3>;
 };
 
 const Styled = styled.div`

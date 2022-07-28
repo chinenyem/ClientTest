@@ -1,13 +1,10 @@
 import { apiBaseHeaders, apiBaseUrl } from "../common/common.constants";
 
-
 export interface TaskDetailsModel {
   id?: number;
   description?: string;
   groupId?: number;
 }
-
-
 
 export interface TaskGroupModel {
   id: number;
@@ -73,7 +70,6 @@ export const deleteTask = async (taskId:number): Promise<Array<TaskDetailsModel>
   }
 };
 
-
 export const saveTask = async (task: TaskDetailsModel): Promise<Array<TaskDetailsModel>> => {
   try {
     const valid = task && task.description && task.groupId;
@@ -85,14 +81,11 @@ export const saveTask = async (task: TaskDetailsModel): Promise<Array<TaskDetail
         credentials: "omit",
         body: JSON.stringify(task),
       } as RequestInit;
-
       const apiresponse = await fetch(apiurl, apiinit);
-
       if (apiresponse && apiresponse.ok) {
         const apiresult = (await apiresponse.json()) as Array<TaskDetailsModel>;
         if (apiresult) return apiresult;
       }
-
       throw new Error("Empty or invalid api response");
     }
     throw new Error("Cannot save an invalid task");

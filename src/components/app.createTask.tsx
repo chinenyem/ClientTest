@@ -5,23 +5,16 @@ import { mapDispatch, mapProps } from "../engine/redux";
 import AppNav from "./app.navbar";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {$getTaskGroups, $saveTask , $getTasks  } from "../engine/slices/tasking.slice";
-import {TaskDetailsModel} from "../engine/proxies/task.proxy";
-
-type Props = {
-    task: TaskDetailsModel;
-};
+import {$getTaskGroups, $saveTask , $getTasks } from "../engine/slices/tasking.slice";
 
 const AppCreateTask: FC =  () => {
     const navigate = useNavigate();
     const dispatch = mapDispatch();
     const groups = mapProps((state) => state.tasking.taskGroups);
-    const tasks = mapProps((state) => state.tasking.activeTasks);
     const [validated, setValidated] = useState(false);
     const cancleCreateTask = () => {
         navigate("/");
     };
-
 
     useEffect((): void => {
         dispatch($getTaskGroups());
@@ -39,7 +32,7 @@ const AppCreateTask: FC =  () => {
         dispatch($saveTask(task)).then((data) => {
             navigate("/");
         }).catch((e) => {
-            console.log(e);
+            console.log("These is an issue with saving a task.");
         });
     }
 
