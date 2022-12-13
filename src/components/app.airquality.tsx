@@ -32,7 +32,6 @@ const AirQualityMeasurement: FC = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(Object.fromEntries(new FormData(e.target)));
         const data = Object.fromEntries(new FormData(e.target));
         let error = false;
         switch (data) {
