@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import taskingSlice from './slices/tasking.slice';
 import userSlice from './slices/user.slice'
+import  airqualitySlice  from "./slices/airquality.slice";
 
 const store = configureStore({
   reducer: {
     user: userSlice,
-    tasking: taskingSlice
+    tasking: taskingSlice,
+    measurement: airqualitySlice
   }
 });
 export type RootDispatch = typeof store.dispatch;
